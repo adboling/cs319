@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+
+<head>
+<title>Character Creation</title>
+<script src="./createcharacter.js"></script>
+</head>
+
+<body>
+<h1>
+Character Creation
+</h1>
+
+<p>
+  <input type="button" value="<- Go Back" onClick="location.href = './mainmenu.html'">
+</p>
+
+<form id="charInfo" name="charInfo">
+  <fieldset>
+    <legend>Character Information</legend>
+    <p id="Name">
+      <label for="name">Name: </label>
+      <input type="text" id="name">
+    </p>
+
+    <p id="Class">
+      <label for="class">Class: </label>
+      <select id="class">
+	    <option value="empty"> </option>
+		<option value="warrior">Warrior</option>
+		<option value="rogue">Rogue</option>
+		<option value="mage">Mage</option>
+		<option value="hunter">Hunter</option>
+		<option value="priest">Priest</option>
+	  </select>
+    </p>
+
+    <p id="Submit">
+      <input type="button" id="submit" value="Submit" onclick="createSaveFile()">
+    </p>
+
+  </fieldset>
+</form>
+
+<script>
+	function createSaveFile() {
+		var saveObj = {name:document.getElementById("name").value, class:document.getElementById("class").value};
+		var saveStr = JSON.stringify(saveObj);
+		var blob = new Blob([saveStr], {type: 'application/json'});
+		console.log(blob);
+
+		var link = document.createElement("a");
+		link.download = saveObj.name + "_" + saveObj.class + ".json";
+		link.innerHTML = "Download File";
+		link.href = window.URL.createObjectURL(blob);
+		document.body.appendChild(link);
+	}
+</script>
+
+</body>
+</html>

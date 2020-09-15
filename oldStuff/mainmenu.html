@@ -1,0 +1,36 @@
+<html>
+<head>
+<script src="./mainmenu.js"></script>
+</head>
+
+<body>
+<h1>
+Main Menu
+</h1>
+
+  <p>
+    <input type="button" value="Create Character" onClick="location.href = './createcharacter.html'">
+  </p>
+  <p>
+    <button onclick="document.getElementById('file-input').click();">Import Character</button>
+    <input id="file-input" type="file" name="name" style="display: none;" onchange="loadSave(this.files)"/>
+  </p>
+  <p>
+    <input type="button" value="Play Game - Select Character">
+  </p>
+
+	<script>
+		function loadSave(inputFiles) {
+			if(inputFiles.length == 1) {
+			    var fr = new FileReader();
+				var saveStr = fr.readAsText(inputFiles[0]);
+				fr.onload = function (e) {
+					var saveObj = JSON.parse(e.target.result);
+					console.log(saveObj);
+				}
+			}
+		}
+	</script>
+
+</body>
+</html>
